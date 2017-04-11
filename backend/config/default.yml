@@ -1,0 +1,12 @@
+db:
+  host: localhost
+  database: messagebox
+  user: root
+  password: root
+
+msgbox_sid_salt: bhFqTSkeLN
+token:
+  token_secret: 'z1GJ0ACCKWJc'
+
+main:
+  port: 3000
