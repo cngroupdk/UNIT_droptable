@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RoutingModule } from '../routing.module';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { MessageboxesComponent } from '../components/public/messageboxes/messageboxes.component';
 
@@ -10,7 +11,8 @@ import { MessageboxesComponent } from '../components/public/messageboxes/message
   ],
   imports: [
       FormsModule,
-      RoutingModule
+      RoutingModule,
+      BrowserModule
   ]
 })
 

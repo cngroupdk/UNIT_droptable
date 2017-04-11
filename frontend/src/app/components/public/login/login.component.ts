@@ -15,9 +15,10 @@ export class LoginComponent
     {}
 
     user = new User(0, '', 0, '');
+    error:string = '';
 
     submitLogin()
     {
-        
+        this.userService.authenticate(this.user.email, this.user.password)    
     }
 }

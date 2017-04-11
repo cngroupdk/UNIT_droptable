@@ -11,6 +11,11 @@ export class UserService
     constructor(private http: Http)
     {}
 
+    public authenticate(email:string, password:string)
+    {
+        
+    }
+
     public create(user:User)
     {
         let headers = new Headers({ 'Content-Type': 'application/json' });

@@ -1,2 +1,5 @@
 # unit-frontend
-Frontend na UnIT
+Frontend for the TellMe application. Start with standard NPM workflow.
+
+1. `npm install`
+2. `npm start`
