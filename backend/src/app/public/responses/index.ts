@@ -27,6 +27,17 @@ function checkResponseParams(req: Request, res: Response, next: NextFunction) {
     }
 }
 
+function checkID(req: Request, res: Response, next: NextFunction) {
+    req.checkParams('id', '`id` required').notEmpty();
+
+    const errors = req.validationErrors();
+    if (errors) {
+        next(new BadRequestError(JSON.stringify(errors)));
+    } else {
+        next();
+    }
+}
+
 function checkSID(req: Request, res: Response, next: NextFunction) {
     req.checkParams('sid', '`sid` required').notEmpty();
 

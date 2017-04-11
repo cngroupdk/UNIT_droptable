@@ -19,7 +19,6 @@ function getAllResponses(req: Request, res: Response, next: NextFunction) {
 
 function createResponse(req: Request, res: Response, next: NextFunction) {
     const user = req.user;
-    console.log(req.params.sid);
     MsgBox.getBySID(req.params.sid)
     .then(msgBox => {
         const res_ = new Res(null, {
@@ -44,11 +43,37 @@ function createResponse(req: Request, res: Response, next: NextFunction) {
 }
 
 function updateReponse(req: Request, res: Response, next: NextFunction) {
-
+    MsgBox.getBySID(req.params.sid)
+    .then(msgBox => {
+        const res_ = new Res(req.params.id, {
+            publishable: +!!req.body.publishable,
+            published: +!!req.body.published,
+            email: req.body.email,
+            value: req.body.value,
+            accountID: msgBox.accountID,
+            msgboxID: msgBox.id,
+            timestamp: new Date()
+        });
+        return res_.update();
+    })
+    .then(data => {
+        res.status(204);
+        res.end();
+    })
+    .catch(() => next(new BadRequestError('No MsgBox with provided SID.')));
 }
 
 function removeResponse(req: Request, res: Response, next: NextFunction) {
-
+    MsgBox.getBySID(req.params.sid)
+    .then(msgBox => {
+        const res_ = new Res(req.params.id, null);
+        return res_.delete();
+    })
+    .then(data => {
+        res.status(204);
+        res.end();
+    })
+    .catch(() => next(new BadRequestError('No MsgBox with provided SID.')));
 }
 
 export default {
