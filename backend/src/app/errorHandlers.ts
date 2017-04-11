@@ -1,12 +1,11 @@
 import { Application, Request, Response, NextFunction } from 'express';
-import StandartHttpError from 'standard-http-error';
-import { Error } from 'standard-http-error';
+import TellMeError from '../lib/errors/TellMeError';
 
 export default function(app: Application) {
-  app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    // if (!(err instanceof StandartHttpError)) {
-      // return void next(err);
-    // }
+  app.use((err: TellMeError, req: Request, res: Response, next: NextFunction) => {
+    if (!(err instanceof TellMeError)) {
+      return void next(err);
+    }
 
     res.statusCode    = err.code;
     res.statusMessage = err.message;
@@ -19,7 +18,7 @@ export default function(app: Application) {
 
   app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     if (process.env.NODE_ENV !== 'production') {
-      console.log(err.message);
+      console.error(err);
     }
 
     res.statusCode    = 500;

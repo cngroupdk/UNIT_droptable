@@ -4,8 +4,8 @@ import knex from "../lib/database";
 class Account {
     constructor(public id: Number, public name: string) {}
 
-    insert(): Promise<Number> {
-        return knex("accounts").insert(this).then(([id]) => id);
+    insert(): Promise<Account> {
+        return knex("accounts").insert(this).then(([id]) => {this.id = id; return this;});
     }
 
     static getAll(): Promise<Account[]> {

@@ -3,22 +3,22 @@ import knex from "../lib/database";
 
 import {QueryBuilder} from "knex";
 
-interface ResponseData {
+export interface ResponseData {
     publishable: boolean,
     published: boolean,
     email: string,
     timestamp: Date,
     value: string,
     accountID: number,
-    mailboxID: number
+    msgboxID: number
 }
 
-export default class Response {
+export class Response {
     constructor(public id: number, public data: ResponseData) {}
 
-    insert(): Promise<number> {
+    insert(): Promise<Response> {
         return knex("responses").insert(this.toMySQLObject())
-             .then(([id]) => id);
+             .then(([id]) => {this.id = id; return this;});
     }
 
     update(): QueryBuilder {
@@ -38,12 +38,12 @@ export default class Response {
             timestamp: this.data.timestamp,
             value: this.data.value,
             account_id: this.data.accountID,
-            mailbox_id: this.data.mailboxID
+            msgbox_id: this.data.msgboxID
         };
     }
 
-    static getAll(accountID: number): Promise<Response[]> {
-        return knex("responses").where({account_id: accountID}).select().map(Response.fromMySQLObject)
+    static getAll(msgboxID: number): Promise<Response[]> {
+        return knex("responses").where({msgbox_id: msgboxID}).select().map(Response.fromMySQLObject)
     }
 
     static getByID(id: string): Promise<Response> {
@@ -59,7 +59,7 @@ export default class Response {
             timestamp: obj.timestamp,
             value: obj.value,
             accountID: obj.account_id,
-            mailboxID: obj.mailbox_id
+            msgboxID: obj.msgbox_id
         }
         return new Response(obj.id, data);
     }

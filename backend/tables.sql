@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.17)
 # Database: messagebox
-# Generation Time: 2017-04-11 10:43:58 +0000
+# Generation Time: 2017-04-11 13:29:24 +0000
 # ************************************************************
 
 
@@ -45,6 +45,7 @@ CREATE TABLE `msgboxes` (
   `name` varchar(255) NOT NULL,
   `account_id` int(11) NOT NULL,
   `created_by` int(11) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `account_id` (`account_id`),
   KEY `created_by` (`created_by`),
@@ -64,7 +65,7 @@ CREATE TABLE `responses` (
   `publishable` tinyint(1) NOT NULL DEFAULT '0',
   `published` tinyint(1) NOT NULL DEFAULT '0',
   `email` varchar(255) NOT NULL,
-  `timestamp` datetime NOT NULL,
+  `timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `value` text NOT NULL,
   `account_id` int(11) NOT NULL,
   `msgbox_id` int(11) NOT NULL,
@@ -91,6 +92,7 @@ CREATE TABLE `users` (
   `role` enum('admin','reader') NOT NULL DEFAULT 'admin',
   `account_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`),
   KEY `account_id` (`account_id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

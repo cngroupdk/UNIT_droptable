@@ -1,14 +1,9 @@
 /**
  * Module dependencies.
  */
-const HttpError = require('standard-http-error');
-
-interface StandardHttpError {
-    new (param?: any): StandardHttpError
-}
 
 export interface ErrorProperties {
-    code: number | string,
+    code: number,
     inner: string | Error,
     name: string,
     reason: string
@@ -20,8 +15,10 @@ export interface ErrorProperties {
  * Base class for all HTTP errors.
  */
 
-// Figure out HTTPError
 export default class TellMeError extends Error {
+    public code: number;
+    public reason?: string;
+
     constructor(messageOrError?: string | Error, properties?: ErrorProperties) {
         const message = messageOrError instanceof Error ? messageOrError.message : messageOrError;
         const error   = messageOrError instanceof Error ? messageOrError : null;
@@ -29,6 +26,8 @@ export default class TellMeError extends Error {
         if (error) {
             properties.inner = error;
         }
-        super(/*properties.code, message, properties*/);
+        super(properties.name);
+        this.code = properties.code;
+        this.reason = properties.reason;
     }
 }

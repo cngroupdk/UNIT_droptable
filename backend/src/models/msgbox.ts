@@ -1,7 +1,9 @@
 import * as Promise from "bluebird";
 import knex from "../lib/database";
 import Hashids = require("hashids");
+import {hashSync} from "bcryptjs";
 import config = require("config");
+import PasswordProtected from "./password";
 
 import {QueryBuilder} from "knex";
 
@@ -10,13 +12,14 @@ export enum Type {
     Text = 2
 }
 
-export class Msgbox {
+export default class Msgbox extends PasswordProtected {
     private static hashids = new Hashids(config.get("msgbox_sid_salt") as string);
 
     private id_: number;
     private sid_: string;
 
-    constructor(sid: string, public type: Type, public is_private: Boolean, public name: String, public accountID: number, public creator: number) {
+    constructor(sid: string, public type: Type, hashedPwd: string, public is_private: Boolean, public name: String, public accountID: number, public creator: number) {
+        super(hashedPwd);
         if (sid != null) {
             this.id_ = Msgbox.hashids.decode(sid)[0];
             this.sid_ = sid;
@@ -41,9 +44,9 @@ export class Msgbox {
         return this.sid_;
     }
 
-    insert(): Promise<number> {
+    insert(): Promise<Msgbox> {
         return knex("msgboxes").insert(this.toMySQLObject())
-             .then(([id]) => id);
+             .then(([id]) => {this.id = id; return this;});
     }
 
     update(): QueryBuilder {
@@ -55,7 +58,7 @@ export class Msgbox {
     }
 
     private toMySQLObject() {
-        return {id: this.id, type: this.type, private: this.is_private, name: this.name, account_id: this.accountID, created_by: this.creator};
+        return {id: this.id, type: this.type, password: this.pwd, private: this.is_private, name: this.name, account_id: this.accountID, created_by: this.creator};
     }
 
     static getAll(accountID: number): Promise<Msgbox[]> {
@@ -66,9 +69,9 @@ export class Msgbox {
         return knex("msgboxes").where({id: Msgbox.hashids.decode(sid)}).select()
             .then((result) => result.length != 0 ? Msgbox.fromMySQLObject(result[0]) : null);
     }
-    
+
     private static fromMySQLObject(obj: any): Msgbox {
-        const box = new Msgbox("", obj.type, obj.private, obj.name, obj.account_id, obj.created_by);
+        const box = new Msgbox("", obj.type, obj.password, obj.private, obj.name, obj.account_id, obj.created_by);
         box.id = obj.id;
         return box;
     }
