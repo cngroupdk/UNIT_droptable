@@ -9,12 +9,22 @@ import { AccountService } from '../../../services/account.service';
 @Component({
     selector: 'dashboard-msgboxes',
     templateUrl: './messageboxes.component.html',
+    styleUrls: ['./messageboxes.component.css'],
     providers: [AccountService],
 })
 
 export class DashboardMsgboxComponent implements OnInit
 {
-    messageboxes:Messagebox[];
+    account:Account = new Account(1, 'FIT');
+    messageboxes:Messagebox[]  = [
+        { id: "1" , type: 1, name: "poc1", open: true, password: '' },
+         { id: "2" , type: 1, name: "poc1", open: true, password: '' },
+          { id: "3" , type: 1, name: "poc1", open: true, password: '' },
+           { id: "4" , type: 1, name: "poc1", open: true, password: '' },
+            { id: "1" , type: 1, name: "poc1", open: true, password: '' },
+             { id: "1" , type: 1, name: "poc1", open: true, password: '' },
+              { id: "1" , type: 1, name: "poc1", open: true, password: '' },
+  ];
 
     constructor(private accountService: AccountService)
     {}

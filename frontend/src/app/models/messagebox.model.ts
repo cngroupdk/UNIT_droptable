@@ -4,7 +4,8 @@ export class Messagebox
         public id:string,
         public type:number,
         public name:string,
-        public open:boolean
+        public open:boolean,
+        public password:string
     )
     {}
 }

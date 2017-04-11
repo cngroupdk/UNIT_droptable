@@ -1,0 +1,51 @@
+<div class="col-md-10 col-md-offset-1 col-xs-12">
+    <h2 class="text-center">Create new Messagebox</h2>
+
+    <div *ngIf="success" class="col-md-12 alert alert-success">
+        {{ success }}
+    </div>
+
+    <form (ngSubmit)="createMessagebox()" #new_messagebox="ngForm" class="form-horizontal">
+
+        <div class="form-group">
+            <label for="msgbox_title" class="col-md-3 col-xs-12 control-label">Title:</label>
+            <div class="col-md-9 col-xs-12">
+                <input type="text" class="form-control" id="msgbox_title" name="msgbox_title" [(ngModel)]="box.name" #msgbox_title="ngModel" required>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="msgbox_type" class="col-md-3 col-xs-12 control-label">Type:</label>
+            <div class="col-md-9 col-xs-12">
+                <select class="form-control" id="msgbox_type" name="msgbox_type" [(ngModel)]="box.type" #msgbox_type="ngModel" required>
+                    <option value="1">Stars box</option>
+                    <option value="2">Text box</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="msgbox_password" class="col-md-3 col-xs-12 control-label">Password:</label>
+            <div class="col-md-9 col-xs-12">
+                <input type="password" class="form-control" id="msgbox_password" name="msgbox_password" [(ngModel)]="box.password" #msgbox_password="ngModel">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-9 col-md-offset-3 col-xs-12">
+                <label>
+                    <input type="checkbox" name="msgbox_opened" [(ngModel)]="box.open" #msgbox_opened="ngModel">
+                    Opened to public
+                </label>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-9 col-md-offset-3 col-xs-12">
+                <button type="submit" class="btn btn-success btn-lg" [disabled]="!new_messagebox.form.valid">Create messagebox</button>
+                <a routerLink='/dashboard/messageboxes' class="btn btn-default">Back</a>
+            </div>
+        </div>
+        
+    </form>
+</div>

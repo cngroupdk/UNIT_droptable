@@ -4,10 +4,12 @@ import { RoutingModule } from '../routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { MessageboxesComponent } from '../components/public/messageboxes/messageboxes.component';
+import { MessageboxComponent } from '../components/public/messagebox/messagebox.component';
 
 @NgModule({
   declarations: [
-    MessageboxesComponent
+    MessageboxesComponent,
+    MessageboxComponent
   ],
   imports: [
       FormsModule,

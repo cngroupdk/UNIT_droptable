@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Messagebox } from '../../models/messagebox.model'
 import { Account } from '../../models/account.model'
@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit
 {
     account:Account;
 
-    constructor(private accountService: AccountService)
+    constructor(private accountService: AccountService, private router: Router, private route: ActivatedRoute)
     {}
 
     ngOnInit()
@@ -29,5 +29,11 @@ export class DashboardComponent implements OnInit
                 console.log(error);
             }
         )
+    }
+
+    logout()
+    {
+        localStorage.removeItem('user_token');
+        this.router.navigate(['login']);
     }
 }

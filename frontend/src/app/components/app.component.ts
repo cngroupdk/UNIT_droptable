@@ -10,5 +10,5 @@ import { MyfooterComponent } from './partials/footer/myfooter.component';
   styleUrls: ['./app.component.css'] 
 })
 export class AppComponent {
-  title = 'TellMeBox';
+  title = 'TellMe Box';
 }

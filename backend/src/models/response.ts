@@ -4,8 +4,8 @@ import knex from "../lib/database";
 import {QueryBuilder} from "knex";
 
 export interface ResponseData {
-    publishable: boolean,
-    published: boolean,
+    publishable: number,
+    published: number,
     email: string,
     timestamp: Date,
     value: string,
@@ -13,7 +13,7 @@ export interface ResponseData {
     msgboxID: number
 }
 
-export class Response {
+export default class Response {
     constructor(public id: number, public data: ResponseData) {}
 
     insert(): Promise<Response> {
@@ -50,7 +50,7 @@ export class Response {
         return knex("msgboxes").where({id: id}).select()
             .then((result) => result.length != 0 ? Response.fromMySQLObject(result[0]) : null);
     }
-    
+
     private static fromMySQLObject(obj: any): Response {
         const data: ResponseData = {
             publishable: obj.publishable,

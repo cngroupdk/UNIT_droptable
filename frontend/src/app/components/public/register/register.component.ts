@@ -24,14 +24,18 @@ export class RegisterComponent
 
     submitRegistration()
     {
+        var account_id;
         this.accountService.create(this.account).subscribe(
+            data => {
+                account_id = data.json().id
+            },
             () => {
-                this.success = 'Account created successfully.'
+                this.userService.create(this.user, account_id).subscribe(
+                    () => {
+                        this.success = 'Account and user successfully created.';
+                    }
+                );
             }
-        );
-
-        this.userService.create(this.user).subscribe(
-            
         );
     }
 }

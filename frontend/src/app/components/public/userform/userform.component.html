@@ -1,11 +1,4 @@
-<div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12 login-component">
-    <h2 class="text-center">Log in</h2>
-
-    <form (ngSubmit)="submitLogin()" #login_form="ngForm" class="form-horizontal">
-
-        <div *ngIf="error" class="alert alert-danger col-md-12">
-            {{ error }}
-        </div>
+<form (ngSubmit)="userAdd()" #login_form="ngForm" class="form-horizontal">
        
         <div class="form-group">
             <label for="user_email" class="col-md-3 col-xs-12 control-label">User email:</label>
@@ -24,11 +17,10 @@
         <div class="form-group">
             <div class="col-md-9 col-md-offset-3 col-xs-12">
                 <button type="submit" class="btn btn-success btn-lg" [disabled]="!login_form.form.valid">Log in</button>
-                or
-                <a routerLink="/registration" routerLinkActive="active" class="btn btn-default">create new account</a>
+            </div>
+            <div class="col-md-9 col-md-offset-3 col-xs-12">
+                <a routerLink="/registration" routerLinkActive="active" class="btn btn-primary btn-lg">Create new account</a>
             </div>
         </div>
     
     </form>
-
-</div>

@@ -25,7 +25,7 @@ import { MyfooterComponent } from './components//partials/footer/myfooter.compon
     RoutingModule,
     LoginModule,
     MessageboxesModule,
-    DashboardModule
+    DashboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

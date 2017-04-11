@@ -1,18 +1,11 @@
-<div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12 login-component">
+<div class="col-md-10 col-md-offset-1 col-xs-12">
     <h2 class="text-center">Create new account</h2>
 
     <div *ngIf="success" class="alert alert-success col-md-12">
         {{ success }}
     </div>
 
-    <form (ngSubmit)="submitRegistration()" #registration_form="ngForm" class="form-horizontal">
-       
-        <div class="form-group">
-            <label for="account_name" class="col-md-3 col-xs-12 control-label">Account name:</label>
-            <div class="col-md-9 col-xs-12">
-                <input type="text" class="form-control" id="account_name" name="account_name" [(ngModel)]="account.name" #account_name="ngModel" required>
-            </div>
-        </div>
+    <form (ngSubmit)="createUser()" #registration_form="ngForm" class="form-horizontal">
        
         <div class="form-group">
             <label for="user_email" class="col-md-3 col-xs-12 control-label">User email:</label>
@@ -38,8 +31,7 @@
         <div class="form-group">
             <div class="col-md-9 col-md-offset-3 col-xs-12">
                 <button type="submit" class="btn btn-success btn-lg" [disabled]="!registration_form.form.valid">Create new account</button>
-                or
-                <a routerLink='/login' class="btn btn-default">go back to login</a>
+                <a routerLink='/dashboard/users' class="btn btn-default">back</a>
             </div>
         </div>
     

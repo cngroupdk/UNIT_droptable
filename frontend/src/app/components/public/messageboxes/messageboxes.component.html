@@ -1,6 +1,10 @@
-<div class="col-md-10 col-md-offset-1 col-xs-12">
+<div class="col-md-8 col-md-offset-2 col-xs-12">
     <h2 class="text-center">{{ account.name }}</h2>
-    <div class="col-md-3 col-sm-6 col-xs-12">
-        
+    <div class="row">
+        <div *ngFor="let box of messageboxes" class="col-xs-6 col-md-3 message-box" >
+            <a href="#" class="thumbnail text-center">
+                <h3>{{box.name}}</h3>
+            </a>
+        </div>
     </div>
-</div>
+</div>  

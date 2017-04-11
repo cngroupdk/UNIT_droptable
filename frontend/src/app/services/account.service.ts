@@ -6,14 +6,18 @@ import { Account } from '../models/account.model';
 @Injectable()
 export class AccountService
 {
-    path = 'http://localhost:4200/api';
+    path = 'http://localhost:3000';
+    options;
 
     constructor(private http: Http)
     {}
 
     public me()
     {
-        return this.http.get(this.path + '/account/');
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem('user_token'));
+        this.options = new RequestOptions({ headers: headers });
+        return this.http.get(this.path + '/account/', this.options);
     }
 
     public get(id:number)
@@ -25,8 +29,13 @@ export class AccountService
     {
         if(id != null)
             return this.http.get(this.path + '/msgboxes?id=' + id);
-        else
-            return this.http.get(this.path + '/msgboxes');
+        else 
+        {
+            let headers = new Headers({ 'Content-Type': 'application/json' });
+            headers.append('Authorization', 'Bearer ' + localStorage.getItem('user_token'));
+            this.options = new RequestOptions({ headers: headers });
+            return this.http.get(this.path + '/msgboxes', this.options);
+        }
     }
 
     public create(account:Account)

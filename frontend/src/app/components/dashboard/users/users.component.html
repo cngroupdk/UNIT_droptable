@@ -1,0 +1,15 @@
+<div class="col-md-10 col-md-offset-1 col-xs-12">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-center">Email</th>
+            </tr>
+            <tr>
+                <th class="text-center"><a routerLink='/dashboard/newUser'>Create new user</a></th>
+            </tr>
+        </thead>
+        <tr *ngFor="let user of users">
+            <td class="text-center">{{ user.email }}</td>
+        </tr>
+    </table>
+</div>

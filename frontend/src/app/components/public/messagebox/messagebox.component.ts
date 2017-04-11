@@ -3,25 +3,21 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Messagebox } from '../../../models/messagebox.model'
 import { Account } from '../../../models/account.model'
+import { Response } from '../../../models/response.model';
 
 import { AccountService } from '../../../services/account.service';
 
 @Component({
     selector: 'messageboxes',
-    templateUrl: './messageboxes.component.html',
-    providers: [AccountService],
-      styleUrls: ['./messageboxes.component.css']
+    templateUrl: './messagebox.component.html',
+    providers: [AccountService]
 })
 
-export class MessageboxesComponent implements OnInit
+export class MessageboxComponent implements OnInit
 {
     account:Account = new Account(1, 'FIT');
-    messageboxes:Messagebox[]  = [
-        { id: "1" , type: 1, name: "Subject PA1", open: true, password: '' },
-        { id: "2" , type: 1, name: "Subject PA2", open: true, password: '' },
-        { id: "3" , type: 1, name: "BI-DBS", open: true, password: '' },
-        { id: "4" , type: 1, name: "BI-ZMA", open: true, password: '' },
-  ];
+    messageboxes:Messagebox = { id: "1" , type: 1, name: "poc1", open: true, password: '' };
+    responses:Response[];
 
     constructor(private accountService: AccountService, private route:ActivatedRoute)
     {}
