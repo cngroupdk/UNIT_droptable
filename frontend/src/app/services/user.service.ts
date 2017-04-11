@@ -6,7 +6,7 @@ import { User } from '../models/user.model';
 @Injectable()
 export class UserService
 {
-    path = 'http://localhost:3000';
+    path = 'http://localhost:4200/api';
     options;
     headers;
 

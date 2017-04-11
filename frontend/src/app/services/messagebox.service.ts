@@ -6,7 +6,7 @@ import { Messagebox } from '../models/messagebox.model';
 @Injectable()
 export class MessageboxService
 {
-    path = 'http://localhost:3000';
+    path = 'http://localhost:4200/api';
     options;
 
     constructor(private http: Http)
