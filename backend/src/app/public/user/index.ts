@@ -4,6 +4,7 @@ import isLoggedIn from '../../../lib/middlewares/isLoggedIn';
 import controller from './controller';
 
 export default function(app: Application) {
+    console.log('Loaded users');
     app.route('/user')
     .get(isLoggedIn, controller.getAlUsers)
     .post(controller.createUser);

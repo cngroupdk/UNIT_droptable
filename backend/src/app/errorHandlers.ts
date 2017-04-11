@@ -4,9 +4,9 @@ import { Error } from 'standard-http-error';
 
 export default function(app: Application) {
   app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    if (!(err instanceof StandartHttpError)) {
-      return void next(err);
-    }
+    // if (!(err instanceof StandartHttpError)) {
+      // return void next(err);
+    // }
 
     res.statusCode    = err.code;
     res.statusMessage = err.message;
